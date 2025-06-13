@@ -1,0 +1,256 @@
+starting with jetpack compose
+
+package com.example.hellosir
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Card
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.hellosir.ui.theme.HellosirTheme
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            Column {
+                Text(text = "Shambh Sada Shiv")
+                Text(text = "Har har mahadev")
+            }
+
+        }
+    }
+}
+_______________________________________________________________________________________________________________________________________________________________________________
+
+_______________________________________________________________________________________________________________________________________________________________________________
+playing with text in jetpack compose
+
+
+ class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            Text(text = "Jatin Sharma is The future millionaire",
+                color = Color.Blue,
+                fontSize = 20.sp ,
+                fontWeight = FontWeight.SemiBold  ,
+                fontFamily = FontFamily.Cursive ,
+                fontStyle = FontStyle.Italic ,
+                letterSpacing = 10.sp ,
+                textDecoration = TextDecoration.LineThrough,
+                textAlign = TextAlign.Center ,
+                lineHeight = 100.sp ,
+                 overflow = TextOverflow.Ellipsis ,
+                softWrap = true ,
+                maxLines = 4 ,
+                modifier = Modifier.background(Color.Gray).fillMaxSize()  )
+
+
+        }
+    }
+}
+_______________________________________________________________________________________________________________________________________________________________________________  making functions to use multiple times todo this we need to keep it in a container which is fulfilled using @composable or comp is short form
+under mainactivity function okay!!
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            Column {
+                showtext("Jatin is best man")
+                showtext("Jatin worships god and loves kindness")
+            }
+
+
+        }
+    }
+    @Composable
+    fun showtext(name : String){
+        Text(text = name,
+            color = Color.Blue,
+            fontSize = 20.sp ,
+            fontWeight = FontWeight.SemiBold  ,
+            fontFamily = FontFamily.Cursive ,
+            fontStyle = FontStyle.Italic ,
+            letterSpacing = 10.sp ,
+            textDecoration = TextDecoration.LineThrough,
+            textAlign = TextAlign.Center ,
+            lineHeight = 100.sp ,
+            overflow = TextOverflow.Ellipsis ,
+            softWrap = true ,
+            maxLines = 4 ,
+            modifier = Modifier.background(Color.Gray).width(500.dp).height(200.dp)  )
+    }
+}
+
+_______________________________________________________________________________________________________________________________________________________________________________     class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            var list : Array<String> = arrayOf("Jatin" , "Anubhav" , "Khushi" , "Manish" , "Prince")
+            Column {
+                Column {
+                    for (name in list)
+                        Text(text = name , modifier = Modifier.padding(10.dp ,0.dp,0.dp,0.dp), fontSize = 20.sp)
+                }
+                Row {
+                    for (name in list)
+                        Text(text = name, modifier = Modifier.padding(10.dp,0.dp,0.dp,0.dp) ,
+                            fontSize = 15.sp)
+                }
+            }
+
+
+        }
+    }
+}
+_______________________________________________________________________________________________________________________________________________________________________________  learning about scrolling
+
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).background(
+                Color.Gray)) {
+                for (i in 1..100){
+                    Text(text = "jatin will be a millionaire" , color = Color.Cyan)
+                }
+            }
+        }
+
+
+        }
+    }
+
+column ke liye use kro
+vertical scroll(rememberScrollState())
+bs vertically scroll kr skte ha then
+
+
+_______________________________________________________________________________________________________________________________________________________________________________  scrolling through lazycolumn--> it is majoritalyy used so using this would helps
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            LazyColumn(content = {
+               item {
+                   for (i in 1..100){
+                       Text(text = "Demon Slayer" , fontSize = 25.sp)
+                   }
+               }
+            })
+        }
+            }
+        }
+
+
+content is the lambda function wihich stores the scrollable things inside it
+
+item - can take on thing only
+items - can take lists tuple or lists etc
+
+lazycolumn helps in boosting performance and is good while nesting
+
+_______________________________________________________________________________________________________________________________________________________________________________scrolling in case of row
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            Row(modifier = Modifier.fillMaxSize().horizontalScroll(rememberScrollState()).background(Color.Gray)
+            ) {
+                for (i in 1..100)
+                    Text(text = "Jatin is blessed" , fontSize = 35.sp,
+                        textAlign = TextAlign.Center , modifier = Modifier.padding(0.dp , 50.dp , 0.dp ,0.dp))
+
+            }
+                }
+            }
+        }
+_______________________________________________________________________________________________________________________________________________________________________________Box Layout in MF Compose
+
+Soch tu ek dibba (box) bana raha hai, aur usme kuch cheezein rakh raha hai.
+
+Ab maan le:
+
+Pehle tune ek photo rakhi
+
+Us photo ke upar tune ek text chipka diya — jaise "Happy Birthday!"
+
+Uske upar ek chhota sa button bhi chipka diya — jaise "Click Me"
+
+Toh yeh sab ek ke upar ek cheezein ho gayi.
+➡️ Isko hi bolte hain stacking.
+➡️ Aur yahi kaam karta hai Box.
+
+
+
+_______________________________________________________________________________________________________________________________________________________________________________
+modifier.align and textalign    in Text
+
+textalign ====== Text ya koi bhi composable screen pe kahaan dikhna chahiye (jaise box ke andar top, center, bottom, etc.)
+
+modifier.align =====Text ya koi bhi composable screen pe kahaan dikhna chahiye (jaise box ke andar top, center, bottom, etc.)
+
+
+_______________________________________________________________________________________________________________________________________________________________________________
+using textfield
+
+bhai textfield ko use krne ke liye alag se ek variable banana padta hai jisme value store ho ske jo ki banta hai aise
+var valueoffield by remember{
+mutablestateof(TextFieldview("")}
+
+yeh jo textfieldview("") hai isme jo bhi likhoge inside the string wo us textfield ki value ban jayegi
+
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            runner()
+        }
+    }
+
+    @Composable
+    fun runner(modifier: Modifier = Modifier) {
+        var valuefield by remember {
+            mutableStateOf(TextFieldValue(""))
+        }
+        Box(modifier = Modifier.fillMaxSize() , contentAlignment = Alignment.Center){
+            TextField(value = valuefield  , onValueChange = {
+                valuefield = it
+            })
+
+        }
+
+    }
+}
+_______________________________________________________________________________________________________________________________________________________________________________
+using different functions in case of text field

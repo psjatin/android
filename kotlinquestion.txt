@@ -1,0 +1,374 @@
+//Write a program that takes a string input and prints whether it is a palindrome.
+
+fun palindrome(word : String) : Boolean{
+    if (word == word.reversed()){
+        return true
+    }else{
+        return false
+    }
+
+}
+fun main(){
+    for (i in 1..10){
+
+        println("Please Enter Word Below:-")
+        var woord : String = readln()
+        if (palindrome(woord)){
+            println("Yes This fucking Shit is a palindrome.")
+        }else if (palindrome(woord) == false){
+            println("This is not a palindrome")
+        }
+    }
+}
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+//create a function that reverses a list without using built in function
+fun reverse(lis : List<String>) : List<String>{
+    var lis2  = mutableListOf<String>()     //empty list
+    var i = lis.size
+    while (i>=0){
+        lis2.add(lis[i])
+        i--
+    }
+    return lis2
+}
+fun main() {
+    println("Tell me about your list length..")
+    var lislen : Int = readln().toInt()
+    var lissss = mutableListOf<String>()
+    for (i in 1..lislen){
+        println("Enter object-")
+        var obj : Int = readln().toInt()
+        lissss.add(obj.toString())
+    }
+    println("Reversed list is ${reverse(lissss)}")
+}
+------------------------------------------------------------------------------------------------------------------------------------------------
+//Write a kotlin function that counts the number of vowels in the string
+
+fun countvowels(line : String) : Int{
+    var vowels : Int = 0
+    for (i in line){
+        if(i.toChar() in listOf<Char>('a' , 'e', 'i' ,'o','u')){
+            vowels++
+        }
+    }
+    return vowels
+}
+fun main() {
+    var a = countvowels("Hello motherfucker i am jatin sharma")
+    println(a)
+}
+------------------------------------------------------------------------------------------------------------------------------------------------
+//Implement a program that checks wheter the number is prime or not
+fun main() {
+    print("Enter your number:- ")
+    var num : Int = readln().toInt()
+    println("\n ${prime(num)}")
+}
+fun prime(number : Int) : Boolean{
+    var count : Int = 0
+    for(i in 1..number){
+        if (number%i == 0){
+            count++
+        }
+    }
+    if(count==2){
+        return true
+    }else{
+        return false
+    }
+}
+------------------------------------------------------------------------------------------------------------------------------------------------
+//write a function which takes a list and gives the sum of all even numbers in it
+fun takelis(lis : List<Int>) : Int{
+    var count : Int = 0
+    for (i in lis){
+        if (i%2==0){
+            count+=i
+        }
+    }
+    return count
+}
+fun main() {
+    println("Enter list length")
+    var len : Int = readln().toInt()
+    var liss = mutableListOf<Int>()
+    for (i in 1..len){
+        println("Enter object:- ")
+        var obj : Int = readln().toInt()
+        liss.add(obj)
+    }
+    println("Total sum of even numbers in the list is :- ${takelis(liss)}")
+}
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+//find the factorial of a number using recursiion
+fun factorial(n : Int) : Int{
+    return if (n==0 || n==1) 1 else n*factorial(n-1)
+}
+fun main() {
+    println("Enter the number of factorial you want:-")
+    var num  = readln().toInt()
+    println("Factorial of the number is ${factorial(num)}")
+}
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+//to find the second largest number in a list
+fun main(){
+    println("Length of the list would be :-")
+    var length : Int = readln().toInt()
+    var lis  = mutableListOf<Int>()
+    for (i in 1..length){
+        println("Enter list object:-")
+        var obj = readln().toInt()
+        lis.add(obj)
+    }
+    println("The second largest element in the list is ${seclargest(lis)}")
+}
+//i guess i have to use sorting here
+fun seclargest(lis : MutableList<Int>) : Int {
+    for (i in 1..(lis.size-1)){
+        for (j in 1..(lis.size-1)){
+            if (lis[j-1]<lis[j]){
+                lis[j-1] = lis[j].also { lis[j] = lis[j-1] }}
+
+        }
+
+    }
+    println(lis)
+    return lis[1]
+}
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+//implement a function that removes the duplicates in a list without using distinct
+fun remove_duplicate(lis : List<Any>) : List<Any> {
+    var lis2  = mutableListOf<Any>()
+    for (i in lis){
+        if (i !in  lis2){
+            lis2.add(i)
+        }
+    }
+    return lis2
+}
+fun main() {
+    println("Length of the list:-")
+    var leng:Int = readln().toInt()
+    var liss : MutableList<Int> = mutableListOf<Int>()
+    for (i in 1..leng) {
+        println("Enter list element:-")
+        var ele : Int = readln().toInt()
+        liss.add(ele)
+
+    }
+    println("The non duplicated lst is ${remove_duplicate(liss)}")
+}
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+//Write a function that checks whether two strings are anagrams of each other.
+
+fun ifanagram(str1 : String , str2 : String) : Boolean{
+    var lis1 : MutableList<Char> = mutableListOf()
+    var lis2 : MutableList<Char> = mutableListOf()
+    for (i in str1){
+        lis1.add(i)
+    }
+    for (j in str2){
+        lis2.add(j)
+    }
+    if (lis1.sorted() == lis2.sorted()){
+        return true
+    }else{
+        return false
+    }
+}
+
+fun main() {
+    println("Enter first String:-")
+    var str1 : String = readln()
+    println("Enter Second String:-")
+    var str2 : String = readln()
+    println("Checking the status of anagram or not ${ifanagram(str1,str2)}")
+}
+------------------------------------------------------------------------------------------------------------------------------------------------
+//Write a program that takes an integer as input and prints whether it is a perfect number (a number whose sum of divisors, excluding itself, is equal to the number).
+fun perfectnumber(number : Int) : Boolean{
+    var lis : MutableList<Int> = mutableListOf()
+    for (i in 1 until number){
+        if (number%i==0){
+            lis.add(i)
+        }
+
+    }
+    if (lis.sum() ==number){
+        return true
+    }else{return false}
+}
+
+fun main() {
+    println("Enter the number:-")
+    var num:Int = readln().toInt()
+    print("CHecking for perfect number ${perfectnumber(num)}")
+}
+------------------------------------------------------------------------------------------------------------------------------------------------
+//Implement a FizzBuzz program that prints numbers from 1 to 50, replacing multiples of 3 with "Fizz", multiples of 5 with "Buzz", and multiples of both with "FizzBuzz".
+fun main() {
+    for (i in 1..50){
+        if (i%15==0){
+            println("Fizzbuzz")
+        }else if(i%5==0){
+            println("Buzz")
+        }else if(i%3==0){
+            println("Fizz")
+        }else{
+            println(i)
+        }
+    }
+}
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+//Create a program that counts and prints the frequency of each character in a given string.
+fun countfreq(character : Char , string : String) : Int{
+    var count: Int = 0
+    for (i in string){
+        if (i == character){
+            count++
+        }
+    }
+    return count
+}
+
+fun main() {
+    println("Enter a line of string:-")
+    var str :String = readln()
+    var lis  = mutableSetOf()
+    for (i in str){
+        if (i == ' '){
+            continue
+        }
+        if (i in lis){
+            continue
+        }
+        var lavda  = countfreq(i , str)
+        println("$i is present $lavda times in string u provided")
+        lis.add(i)
+    }
+}
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+//Write a function that generates the Fibonacci sequence up to a given number using loops.
+fun fibonacci(num : Int ) : List<Int>{
+    if (num == 0) return listOf(0)
+    if (num == 1) return listOf(0,1)
+    var fiblis : MutableList<Int> = mutableListOf(0,1)
+    var a = 0
+    var b = 1
+    for (i in 2..(num-1)){
+        var next = a+b
+        fiblis.add(next)
+        a = b
+        b = next
+    }
+    return fiblis
+}
+fun main() {
+    println("Enter the number:-")
+    var num = readln().toInt()
+    var answer = fibonacci(num)
+    println(answer)
+}
+------------------------------------------------------------------------------------------------------------------------------------------------
+//Implement a program that takes a list of numbers and prints all the prime numbers from the list.
+
+fun isprime(num : Int) : Boolean{
+    var count :Int = 0
+    if (num<2) return false
+    for (i in 2..num-1){
+        if (num%i==0){
+            count++
+        }
+    }
+    if (count == 0) return true
+    else return false
+}
+fun main() {
+    println("Length of the list would be:-")
+    var len : Int = readln().toInt()
+    var lis : MutableList<Int> = mutableListOf()
+    for (i in 1..len){
+        println("Enter list elements:-")
+        var obj = readln().toInt()
+        lis.add(obj)
+
+    }
+    for (i in lis){
+        if (isprime(i)){
+            println("$i is a prime number")
+        }
+    }
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+//Write a program that prints a right-angled triangle pattern using *. (Example for n=4:)
+fun main() {
+    for (i in 1..4){
+        println("*".repeat(i))
+    }
+}
+------------------------------------------------------------------------------------------------------------------------------------------------
+//Implement a program to reverse a number without converting it to a string.
+fun intreverse(num:Int) : Int {
+    var number = num
+    if (num<0){
+        println("Enter valid")
+        }
+    var reversed : Int  = 0
+    while (number != 0){
+        var digit = number%10
+        reversed = (reversed*10)+digit
+//        number-=digit
+        number /= 10
+    }
+    return reversed
+}
+fun main() {
+    println("Enter Your Number:-")
+    var num = readln().toInt()
+    println("Reversed and get:- ${intreverse(num)}")
+}
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+fun gcd(num1 : Int , num2 : Int) : Int{
+    var d1 : MutableList<Int> = mutableListOf()
+    var d2 : MutableList<Int> = mutableListOf()
+    for (i in 1..num1){
+        if (num1%i==0){
+            d1.add(i)
+        }
+    }
+    for(j in 1..num2){
+        if (num2%j==0){
+            d2.add(j)
+        }
+    }
+    var flis : MutableList<Int> = mutableListOf()
+    for(i in d1){
+        if (i in d2){
+            flis.add(i)
+        }
+    }
+    return flis.last()
+}
+fun main() {
+    println("Please Enter Num 1:-")
+    var num1 : Int = readln().toInt()
+    println("Please Enter Num 2:-")
+    var num2 : Int = readln().toInt()
+    println("The greatest common factor in between the two numbers are ${gcd(num1,num2)}")
+}
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------

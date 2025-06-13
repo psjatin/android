@@ -1,0 +1,1155 @@
+import kotlin.reflect.typeOf
+
+fun main(){
+    val sports : Array<String> = arrayOf("cricket" , "chess" , "volleyball" , "hockey" , "carrom")
+    println(sports::class)
+//    println(sports)
+    println(sports.contentToString())
+    var fruits : Array<String> = arrayOf("papaya" , "mango" , "apple" , "pomogranate")
+    println(fruits[2])
+    fruits[2] = "Chicoo"
+    print(fruits.contentToString())
+    sports[2] = "ludo"
+    print(sports.contentToString())
+}
+
+--------------------------------------------------------------------------------------------------------------
+
+
+class student(val name : String , val id : Int , val Class : Int){
+    fun info(){
+        print("Student Name $name is a student of $Class with roll no $id")
+    }
+}
+fun main(){
+    var stu1 = student("Jatin" , 16 , 13)
+    println(stu1.name)
+    println(stu1.id)
+//    println(stu1.Class)
+    stu1.info()
+
+
+}
+
+---------------------------------------------------------------------------------------------------------------------
+
+fun main(){
+//    lets try to take input from the user
+//    the key difference between readline and readln is that
+//     readline will return as null if nothing is given as input while
+//    readln will crash the whole code
+    print("Please enter the amount of money you want to lend from jatin:- ")
+    val amnt = readln().toInt()
+    println("The amount you entered is $amnt")
+
+    print("Enter Your Name First:- ")
+    val name = readLine()
+    println("Your name is ${name}")
+}
+
+
+-----------------------------------------------------------------------------------------------------------------------
+
+
+//way 1
+
+fun main(){
+//    introducing conditional statements if else and when
+    print("Plz enter a positive no.:- ")
+    val number:Int = readln().toInt()
+    if (number in 50..150){
+        println("\nIt is under if block")
+    }
+    else{
+        println("It's under else's block")
+    }
+
+}
+
+
+//way 2
+
+fun main(){
+//    using the conditional statement as an expression
+    println("Enter Your Age below-")
+    val age : Int = readln().toInt()
+    val teen : String = if (age in 13..19)
+        println("Comes under Teenage").toString()
+
+    else
+        println("Comes under adult age").toString()
+}
+
+using when statement
+
+
+fun main(){
+    println("Enter Your Marks in Maths:- ")
+    val marks:Int = readln().toInt()
+    val grade : Char = when(marks)
+    {
+        in 91..100 ->{
+            'A'
+        }
+        in 81..90 -> {
+            'B'
+        }
+        in 71..80 -> {
+            'C'
+        }
+        else -> {
+            'F'
+        }
+
+
+    }
+}
+
+
+"->" is mandatory to use in single line cases and "" is for string and '' is for character
+
+
+
+-----------------------------------------------------------------------------------------------------------------------
+
+#loops
+using while loop...
+
+
+fun main(){
+    var count = 1
+    while (count<=15){
+        println("I am grateful  $count")
+//        print("")
+        count++
+
+    }
+}
+
+using do while (isme ek baar operatiuon ho hi jaata hia due to code format hi aisa hota hai baaki fir agar condition match na kre to terminatiuon ho jaata hai )
+
+using do while
+
+fun main(){
+   var num : Int = readln().toInt()
+
+    var count: Int = 1
+   do{
+       println(num*count)
+       count+=1
+   } while (count<=10)
+}
+
+using for loop
+
+fun main(){
+    var count = 1
+    for (i in 1..10){
+        print("$i ")
+    }
+    print("\n")
+    for(j in 10 downTo 5){
+        print("$j ")
+    }
+    print("\n")
+    for(j in 110 until 119){
+        print("Jatin${j} ")
+    }
+
+}
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+import kotlin.math.pow
+fun main(){
+    println("Enter Your Number:-")
+    var number : Int = readln().toInt()
+    var cub = 0
+    var conversion: String = number.toString()
+    for (i in conversion){
+
+        cub+=i.digitToInt().toDouble().pow(3).toInt()
+    }
+    println(cub)
+}
+
+
+there is a difference in btw toINt () and digit to int() function which is important for use that 4
+for conversion of digits(0 to 9) assigned as character ie. Char(0 to 9) toint() will not create into int
+as it is for coversion of string to int
+while digititint() will be used
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+fun main(){
+    println("main function is running right now...")
+
+    println("Please enter your number: - ")
+    var number : Int = readln().toInt()
+    println("Number of digits in $number are ${digit_count(number)}")
+
+}
+
+fun digit_count(digit : Int) : Int
+{
+    var count : Int = 0
+    for (i in digit.toString()){
+        count+=1
+    }
+    return count
+
+}
+
+
+syntax for function are
+fun name(argument : Type ) : Type of return statement(only if return is given) {
+
+	return xxxx
+}
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+syntax for lambda functions  which is quite fine
+it goes with
+var/val fun_name = {argments : type -> function for performing}
+
+
+fun main(){
+    val lambda_add = {a : Int , b : Int -> a+b}
+    val lambda_substract = {a : Int , b : Int -> a-b}
+    val lambda_divide = {a : Int , b : Int -> a/b}
+    val lambda_multiply = {a : Int , b : Int -> a * b}
+    println(lambda_multiply(2 , 3))
+    println(lambda_divide(10 , 2))
+    println(lambda_add(5 , 789  ))
+}
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+var num = readlnOrNull()?.toIntOrNull() ?: run{
+        println("Oops wrong input entered man")
+        return
+    }
+
+
+thats how we handle exceptions for null exactly
+now ?: is known as elvis operator and ?. are used for calling properties for possible null quantities and ?= is to assign an variable or value to null
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+for using higher  order functions we just have to use function in argument of parent function and assign its type as () -> Unit
+
+fun main(){
+//    this is main
+    println("Enter your Number:-")
+    var num = readlnOrNull()?.toIntOrNull() ?: run{
+        println("Oops wrong input entered man")
+        return
+    }
+    quadraple(num) { print("hello its working") }
+}
+
+fun quadraple(number: Int, functionn:() -> Unit){
+    println("The quadraple of the number is ${number*number*number*number}")
+    functionn()
+}
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//higher order functions in kotlin
+import kotlin.math.*
+
+//inside function having argument
+fun main(){
+//    using main
+    println("Enter Your no.:-")
+    val num = readlnOrNull()?.toIntOrNull()?: run {
+        println("This is not the right wahy to do things man")
+        return
+    }
+
+    squrt(num , { println("my name is jatin sharma") })
+    squrt(36){ println("My name is khatun ka maen") }
+    squrt(25 , { println(it) })
+
+
+}
+
+
+fun squrt(number:Int , callback:(message:String)->Unit){
+    println("Square root of the following no. is \n ${sqrt(number.toDouble())}")
+    callback("Hemlo")
+}
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+							CLASSES AND OBJECTS
+
+++++++++++++++++++++without constructor++++++++++++++++++++
+
+fun main(){
+//    this is main running right now
+    var audi1 = cars()
+    audi1.name = "Audi R8"
+    audi1.manufacturer = "Volswagen"
+    audi1.cost = 198000
+    audi1.cardetails()
+}
+
+class cars //header
+{
+    var name :String = ""
+    var manufacturer : String = ""
+    var cost : Int = 0
+//    while giving parameters like this for any class we have to assign them with some values which can be altered throughout
+
+    fun cardetails(){
+        println("$name is manufactured under $manufacturer having a decent cost of $$cost")
+    }
+}
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
++++++++++++++++++with constructor+++++++++++++++++++
+		primary constructor rule 1
+
+package oops
+
+
+
+fun main(){
+//    this is main running right now
+    var audi1 = cars("GLS" , "Mercedes" , 140000)
+
+//    audi1.name = "Audi R8"
+//    audi1.manufacturer = "Volswagen"
+//    audi1.cost = 198000
+
+    audi1.cardetails()
+}
+
+class cars constructor(
+    var name :String ,
+    var manufacturer : String ,
+    var cost : Int ,
+)
+{
+
+//    while giving parameters like this for any class we have to assign them with some values which can be altered throughout
+
+    fun cardetails(){
+        println("$name is manufactured under $manufacturer having a decent cost of $$cost")
+    }
+}
+
+
+			primary constructor rule 2
+
+package oops
+
+
+
+fun main(){
+//    this is main running right now
+    var audi1 = cars("GLS" , "Mercedes" , 140000)
+
+//    audi1.name = "Audi R8"
+//    audi1.manufacturer = "Volswagen"
+//    audi1.cost = 198000
+
+    audi1.cardetails()
+}
+
+class cars constructor(
+    var name :String ,
+    var manufacturer : String ,
+    var cost : Int ,
+)
+{
+
+//    while giving parameters like this for any class we have to assign them with some values which can be altered throughout
+
+    fun cardetails(){
+        println("$name is manufactured under $manufacturer having a decent cost of $$cost")
+    }
+}
+
+
+
+NOW THERE IS SOME IMPORTANT INFORMATION THAT IF IN THE CONSTRUCTOR DETAILS IF
+WE JUST DONT ASSIGN PARAMETERS WITH VAR OR VAL, THEN THEY WILL ONLY BE SAID AS PARAMETERS OF CONSTRUCTOR
+I.E. CAN NOT BE ASSIGNED AS A PART OF CLASS ITSELF
+TO ASSIGN THEM FOR USE IN CLASS WE MUST ASSIGN THEM WITH VAR VAL OR JUST ASSIGN THEM USING INIT FUNCTION IN THE CLASS
+
+
+
+ASSIGNING WITH INIT FNCTION:-
+
+
+
+fun main(){
+//    this is main running right now
+    var audi1 = cars("GLS" , "Mercedes" , 140000)
+    audi1.cardetails()
+}
+
+class cars constructor(name:String , manufacturer :String , cost: Int)
+{
+    var name : String
+    var manufacturer : String
+    var cost : Int
+
+    init {
+        this.name = name
+        this.manufacturer = manufacturer
+        this.cost = cost
+    }
+    fun cardetails(){
+        println("$name is manufactured under $manufacturer having a decent cost of $$cost")
+    }
+}
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+In Kotlin, when defining a primary constructor, you can use var or val in front of parameters to declare properties.
+However, in a secondary constructor, you cannot use var or val because the parameters are only temporary values
+passed to the constructor and do not automatically become properties of the class.
+
+
+package oops
+
+fun main(){
+//    running main
+    var jatin = Stu("Jatin" , "AIDS - B1" , 1619051924)
+//    jatin.details()
+    var anubhav = Stu(name = "Anubhav Ojha" , "AIDS - B1" ,  4519051924)
+//    anubhav.details()
+
+}
+
+class Stu(var name : String , var classs : String , var rollno : Long){
+    init{
+        println("Added a new info...")
+        println("Well this is first constructor..")
+
+    }
+    constructor(name: String, rollno: Long, classs : String ) : this(name , classs , rollno){
+        println("Hello i am second constructor..")
+
+    }
+
+    constructor(name: String , rollno: Long) : this(name, "AIDS - B3" , rollno ){
+        println("this is third constructor calling")
+    }
+    constructor(name: String) : this(name , "AIDS B1" , 0){
+        println("this is fourth constructor")
+    }
+    fun details(){
+        println(name)
+        println(classs)
+        println(rollno)
+        println("\n")
+    }
+}
+
+
+THIS OPERATOR IS USED BECAUSE IT IS NECCESSARY AS IT CALLS THE PRIMARY OPERATORS IN TO THE SECONDARY OPERATORS
+WHEN THE SECONDARY OPERATOR IS CALLED THEN THIS IS ALWAYS TRUE THAT PRIMARHY WILL BE CALLED FIRST
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+package oops
+
+class couple(var boyname : String, var girlname: String, var duration: Double){
+    init {
+        println("This is first constructor running..")
+    }
+    constructor(boyname: String , girlname: String) : this(boyname , girlname , 0.0){
+        println("This is second constructor running..")
+        var n  = readlnOrNull()?.toIntOrNull()//?:run { println("Yo1 1 // u entered nothing into it..") }
+        if (n== null){
+            println("Things are getting messy..")
+        }else{
+        duration = if (n<=10) 0.5 else 1.0
+    }}
+    constructor(boyname : String) : this(boyname , "unknown"){
+        println("hemlo third constructor working here mother fucker")
+    }
+    fun details(){
+        println("This couple having boy named $boyname and girl named $girlname has been together for $duration years")
+    }
+}
+
+
+
+fun main(){
+//    this is main running here
+    var jashi = couple("Jatin Sharma" , "Khushi Shukla" , 2.0)
+    jashi.details()
+    var anjal = couple("Anubhav Ojha" , "Kajal Sharma")
+    anjal.details()
+    var mehnish = couple("Manish Shrivastav")
+    mehnish.details()
+}
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+package oops
+
+import kotlin.reflect.KProperty
+
+//we are going to learn about getters and setters
+
+class business(var name : String , var partners : Int){
+    var investment : Long = 1000000
+        get() {
+            return field
+        }
+        set(value){
+            if (value>=1000000){
+                field = value
+            }
+        }
+
+    var establishment : Int = 1999
+        get() = field
+        set(value) {
+            field = if (value>=2000) value-2000 else value
+        }
+    init {
+//        this.name = "unknown"
+//        this.investment = 500000
+//        this.establishment = 1947
+//        this.partners = 0
+        println("Running..")
+    }
+
+    fun details(){
+        println("Investment Put on business name $name is" +
+                " $$investment established in year $establishment")
+    }
+
+}
+
+fun main(){
+//    println("fun is running...")
+    var p = business("unknown" , 0)
+    var i : Int = 0
+    while (i<=5){
+        println("Enter 1. to enter business name.")
+        println("Enter 2. to enter no. of partners")
+        println("Enter 3. to enter investment")
+        println("Enter 4. to enter year of establishment.")
+        println("Enter 5. to display final info")
+        var num = readlnOrNull()?.toIntOrNull()
+        if (num == null){
+            println("Brother its not correct man")
+        }
+        if (num==1){
+            var name2 : String = readln()
+            p.name = name2
+        }
+        else if(num==2){
+            var partner2 : Int = readln().toInt()
+            p.partners = partner2
+        }
+        else if(num==3){
+            var investment2: Long = readln().toLong()
+            p.investment = investment2
+        }
+        else if(num==4){
+            var est : Int = readln().toInt()
+            p.establishment = est
+        }
+        else if (num==5){
+            p.details()
+        }
+        else{
+            break
+        }
+    }
+}
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+					Overriding and inheritance using classes
+overriding any function or PROPERTY IS DONE THROUGH USING BOTH OPEN FUNCTION IN BASE OR SUPER FILE and OVERRIDE FUNCTION IN SUBCLASS
+
+package oops
+
+open class Employee(){
+    var name : String = "none"
+        get(){
+            println("Set up")
+            return field
+        }
+        set(value){
+            if (name == null) {
+                println("Its okay")
+            }else{
+                field = value
+            }
+        }
+    var salary : Long = 0
+        set(value) {
+             if (value<=100000){
+                field = 100
+            } else{
+                field = value
+            }
+        }
+
+    open fun info(){
+        println("$name has a Ruppees $salary package.")
+    }
+}
+
+class Developer : Employee(){
+    var proglang : String = "Python"
+        get() {
+            println("Programming Language added.")
+            return field}
+        set(value){
+            field = value
+        }
+
+
+    override fun info() {
+//        return super.info()
+        println("------------------")
+        println("$name ---- $salary ----- $proglang")
+
+    }
+
+}
+class Manager : Employee(){
+    var Bonus : String = "none"
+        set(value) {
+            field = value
+        }
+
+    override fun info() {
+//        return super.info()
+        println("$name ---- $salary ----- $Bonus")
+    }
+}
+
+fun main(){
+    while(true){
+        println("Enter Your Choice Here:-")
+        var opener = readlnOrNull()?.toIntOrNull()
+        if (opener == null){
+            println("Sorry But it must not be null")
+        }
+        if (opener == 1){
+            var p = Developer()
+            println("Enter Developers' Name:-")
+            p.name = readln()
+            println("Enter Developer's Programming Language:-")
+            p.proglang = readln()
+            println("Enter Developer's Salary:-")
+            p.salary = readln().toLong()
+
+            println(p.info())
+        }
+        else if (opener==2){
+            var p = Manager()
+            println("Enter Manager's Name:-")
+            p.name = readln()
+            println("Enter Manager's Bonus:-")
+            p.Bonus = readln()
+            println("Enter Manager's Salary:-")
+            p.salary = readln().toLong()
+
+            println(p.info())
+
+        }else{
+            println("Shut the fuck up.")
+            break
+        }
+
+    }
+}
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+package oops
+open class Person{
+    var name : String = "None"
+    var age : Int = 0
+    init{
+        println("In person")
+    }
+
+}
+class Student : Person(){
+    var studentid : Long = 200000
+
+    fun display(){
+        println("$name has a studentid numbered = $studentid aged $age")
+    }
+}
+
+fun main(){
+    var p = Student()
+    p.name = readln()
+    p.age = readln().toInt()
+    p.studentid = readln().toLong()
+    p.display()
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+package oops
+
+import kotlin.time.times
+
+open class Shape(){
+    init{
+        println("in Shape")
+    }
+    open fun area(){
+        println("Area is motherfucking area")
+    }
+}
+class Circle : Shape(){
+    var radius : Double = 0.0
+    override fun area() {
+//        super.area()
+        println("Area = ${radius*radius*3.14}")
+    }
+
+}
+
+fun main(){
+    var p = Circle(
+    )
+    p.radius = readln().toDouble()
+    p.area()
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+package oops
+open class Vehicle(var name: String , var brand : String , var year : Int){
+    open fun showmessage(){
+        println("$brand --- $name --- $year")
+    }
+
+}
+class Car(name: String , brand: String , year: Int ,var model : String) : Vehicle(name,brand,year){
+    override fun showmessage() {
+        super.showmessage()
+        println("$brand --- $name --- $year ---- $model")
+    }
+
+}
+fun main(){
+    var p = Car("none" , "none" , 0 , "none")
+    p.name = readln()
+    p.model = readln()
+    p.brand = readln()
+    p.year = readln().toInt()
+    p.showmessage()
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+					ABSTRACT CLASSES AND INTERFACES
+abstract class Shape(){
+    init {
+        println("Shape is running")
+
+    }
+    abstract fun area()
+
+    abstract fun perimeter()
+    fun details(){
+        println("This is a shape...")
+    }
+}
+
+class Square(var length : Double) : Shape(){
+    override fun area() {
+        var ar : Double = length * length
+        println("The area of Square is $ar unit squares")
+    }
+
+    override fun perimeter() {
+        var per  : Double = 4.0 * length
+        println("The perimeter of square is $per unit squares")
+    }
+}
+
+class Rectangle(var length: Double , var breadth : Double) : Shape(){
+    override fun area() {
+        var ar : Double  = length*breadth
+        println("The area of rectangle is $ar")
+
+    }
+
+    override fun perimeter() {
+        var per : Double = 2*(length+breadth)
+        println("The perimeter of the rectangle is $per")
+    }
+}
+
+fun main() {
+    var shape1 = Square(15.0)
+    var shape2 = Rectangle(10.0 , 9.0)
+    shape1.area()
+    shape2.area()
+    shape2.perimeter()
+    shape1.perimeter()
+    shape1.details()
+    shape2.details()
+
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+abstract class Vehicle{
+
+    abstract var speed : Int
+
+    abstract fun displayspeed()
+
+}
+
+class Bike() : Vehicle() {
+    override var speed: Int = 0
+
+    override fun displayspeed() {
+        println("Speed of bike set up to $speed")
+    }
+
+}
+
+fun main() {
+    var p = Bike()
+    var speed = readlnOrNull()?.toIntOrNull()
+
+    if (speed == null){
+        println("No null value pass please")
+    }
+    else{
+        p.speed = speed
+    }
+    p.displayspeed()
+
+
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+abstract class Bankaccount{
+    abstract var balance : Double
+
+    abstract fun withdraw(amount : Double)
+    fun deposit(amount: Double){
+        balance+=amount
+        println("$amount successfully deposited in account.")
+    }
+    fun checkbalance(): Double {
+        return balance
+    }
+}
+class Savingsaccount() : Bankaccount(){
+    override var balance : Double = 0.0
+
+    override fun withdraw(amount: Double) {
+        if (amount in 1.0..10000.0){
+            balance-=amount
+            println("Succesfully $amount withdrawn")
+        }
+        else{
+            println("Withdrawal fail due to over amount..")
+        }
+    }
+}
+
+class Currentaccount(): Bankaccount(){
+    override var balance:Double = 0.0
+    override fun withdraw(amount: Double) {
+        balance-=amount
+        println("$amount successfully withdrawn.")
+    }
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+abstract class Employee{
+    abstract var salary : Int
+    abstract fun calculatebonus()
+}
+class Manager() : Employee(){
+    override var salary : Int = 0
+    override fun calculatebonus() {
+        var bonus : Double = 0.1 * salary
+        println("Bonus is $bonus")
+    }
+}
+class Developer() : Employee(){
+    override var salary: Int = 0
+
+
+    override fun calculatebonus() {
+        var bonus : Double = salary * 0.05
+        println("Bonus is $bonus")
+    }
+}
+
+fun main() {
+    var developer1 = Developer()
+    developer1.salary = 14000
+    var manager1 = Manager()
+    manager1.salary = 20000
+    var developer2 = Developer()
+    developer2.salary = 100000
+    var manager2 = Manager()
+    manager2.salary = 50000
+    developer1.calculatebonus()
+    developer2.calculatebonus()
+    manager1.calculatebonus()
+    manager2.calculatebonus()
+}
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//abstract classes and interfaces(could have multiple heirarchy in case of child) and data classes and enums and sealed classes
+
+abstract class Product(var name : String , var price : Int){
+
+    abstract fun calculatediscount() : Double
+    fun displayprice() : String{
+        return "Final Price of the Product is $price"
+    }
+}
+class Electronics(name: String , price: Int) : Product(name , price){
+    override fun calculatediscount() : Double {
+        var discountprice : Double = 0.1*price
+        price-=discountprice.toInt()
+        return discountprice
+    }
+
+}
+class Clothing(name: String , price: Int) : Product(name , price){
+    override fun calculatediscount(): Double {
+        var discountprice : Double = 0.2*price
+        price-=discountprice.toInt()
+        return discountprice
+    }
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+INTERFACES : - In Kotlin, an interface is like a blueprint for classes. It defines a set of methods and properties that other classes must implement, but it does not store state like a class. Unlike abstract classes, interfaces cannot have constructors, and a class can implement multiple interfaces (which is not possible with abstract classes, as Kotlin does not support multiple inheritance).
+
+Can have method implementations?	✅ Yes	✅ Yes
+Can have abstract methods?	✅ Yes	✅ Yes
+Can have constructors?	❌ No	✅ Yes
+Can store state (fields with values)?	❌ No	✅ Yes
+Supports multiple inheritance?	✅ Yes	❌ No (only single inheritance)
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+interface workable{
+    fun work()
+    }
+
+class Employee : workable{
+    override fun work() {
+        println("Employee is working!")
+    }
+}
+class Robot : workable{
+    override fun work() {
+        println("Performing Automated tasks!")
+    }
+}
+
+fun main() {
+    var person1 : workable = Employee()
+    var person2  = Employee()
+    person1.work()
+    person2.work()
+    println(person1::class.simpleName)
+    println(person2::class.simpleName)
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+interface one{
+    fun shownumber(){
+        println("its one")
+    }
+}
+interface two{
+    fun shownumber(){
+        println("its two")
+    }
+}
+class c : one , two{
+    override fun shownumber() {
+        println("This is happening")
+        super<one>.shownumber()
+        super<two>.shownumber()
+    }
+}
+fun main(){
+    val obj = c()
+    obj.shownumber()
+}
+
+
+
+we used
+super<interface>.methodname
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+			DATA CLASSES
+* MUST HAVE ONE PRIMARY CONSTRUCTOR PARAMETER
+*IT CAN NOT BE ABSTRACT(INCOMPLETE) , SEALED , OPEN , INNER
+*TOSTRING()
+*COPY()
+*EQUALS()
+*destructuring declarations -> also involves pair and triple
+
+//data class
+data class Book(var name : String , var cost : Double , var date : String)
+class Bookie(var name: String , var cost: Double , var date: String)
+
+@RequiresApi(Build.VERSION_CODES.O)
+fun main() {
+    var book1 = Book("Spiderman 2" , 1500.5 , "15-05-24")
+    println(book1.toString())
+    var book2 = book1.copy()
+    println(book2)
+    var nowdate = LocalDateTime.now()
+    val formater = DateTimeFormatter.ofPattern("dd/yy/mm")
+    val nwdate = nowdate.format(formater)
+    println(nwdate)
+    println(nowdate)
+}
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+data class Employee (var name : String , var salary : Int , var department : String){
+
+}
+
+fun main() {
+    var jatin = Employee("Jatin Sharma" , 1500000000 , "CEO")
+    println(jatin.toString())
+    var (std_name, salary_his , departname) = jatin
+    println("$std_name , $salary_his , $departname")
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+data class Student(var name: String){
+    var clas :Int
+    init{
+        clas = 0 //clas is initialised
+    }
+}
+fun main() {
+    val stu1 = Student("Jatin")
+    val stu2 = Student("Jatin")
+    stu1.clas = 12
+    stu2.clas = 12
+    println(stu1 == stu2)
+    println(stu1.toString())
+    println(stu2.toString())
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+						HIGHER ORDER FUNCTIONS
+
+//lets try for higher order functions
+
+fun adder(a : Int , b: Int , operation : (Int , Int)-> Int) : Int{
+    return operation(a,b)
+}
+
+fun add(a :Int , b:Int) :Int{
+    return a+b
+}
+fun mul(a:Int,b:Int) : Int{
+    return a*b
+}
+fun main(){
+    var kapiva : Int = adder(15,10 ,::add)
+    var kapiva2 : Int = adder(15,10 ,::mul)
+    println(kapiva)
+    println(kapiva2)
+
+}
+
+
+
+::add
+		it gives function refrence
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+fun calculate( obj : String) :(Int , Int) -> Int{
+    return when(obj){
+        "add" -> {a , b  -> a+b}
+        "sub" -> {a , b  -> a-b}
+        "mutliply" -> {a, b-> a*b}
+        else -> {a , b -> 0}
+
+    }
+}
+fun main(){
+    println("Enter i number:-")
+    var a: Int = readln().toInt()
+    println("Enter i number:-")
+    var b: Int = readln().toInt()
+    var kabja = calculate("add")
+    println(kabja(a ,b))
+}
+
+
+
+
