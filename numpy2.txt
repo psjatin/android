@@ -1,0 +1,133 @@
+import numpy as np
+# a_zeros = np.zeros(4)
+# print(a_zeros)
+# a_zeros1 = np.zeros((3,4))
+# print(a_zeros1)
+# a_one = np.ones(5)
+# print(a_one)
+# a_one1 = np.ones((4,5))
+# print(a_one1)
+a_one = np.ones((3,3))
+print(a_one)
+
+a_empty = np.empty((3,3))  #this shit contains last updated memory of similar array inside it
+print(a_empty)
+
+a_range = np.arange(5)
+print(a_range)
+arr1 = np.random.rand(2,3)
+arr2 = np.random.randn(2,2,2)
+print(arr2)
+arr3 = np.random.randint(10,100,10)
+print(arr3)
+
+-----------------------------------------------------
+integer - i
+boolean - b
+unsigned integer - u
+float - f
+complex float - c
+timedelta - m
+datetime - M
+object - O
+string - S
+Unicode string - U
+the fixed chunk of memory for other types(void) -V
+-----------------------------------------------------
+
+#setting data type in numpy
+#way 1
+arr1  = np.int8([1,2,3,4,5,4])
+print(arr1)
+print(arr1.dtype)
+#way 2
+arr2 = np.array([12,34,54,65,33] , dtype=np.int16)
+print(arr2.dtype , type(arr2))
+#way 3
+arr3 = np.array([12,4,1,57,52,96,45] , dtype= "f")
+print(arr3.dtype)
+
+#way 4
+arr4 = np.array([12,354,63,63,64,23])
+arr5 = np.astype(arr4 , np.float128)
+print(arr4.dtype ,arr5.dtype)
+
+
+------------------------------------------------------
+a + b               np.add(a,b)
+a - b               np.subtract(a,b)
+a \ b               np.divide(a,b)
+a * b               np.multiple(a,b)
+a % b               np.mod(a,b)
+a ** b              np.pow(a,b)
+1/a                 np.reciprocal(a)
+------------------------------------------------------
+
+#using arithematic operators
+#there are two specific formats for the thing
+#for one dimension
+arr1 = np.array([1,2,3,4])
+print(np.add(arr1 , 6))
+arr2 = np.array([12,34,53,21])
+print(np.subtract(arr1 , arr2))
+print(np.multiply(arr1,arr2))
+arr3 = np.astype(np.divide(arr2 , arr1) , np.int16)
+print(arr3 , arr3.dtype)
+arr4 = np.astype(np.reciprocal(np.array([12,23,34,45])) , np.float32)
+print(arr4)
+
+#for 2
+arr2_1 = np.array([[2,3,4] , [5,6,7] , [12,34,45]])
+arr2_2 = np.array([[4,25,85] , [54,25,6] , [7,5,1]])
+print(arr2_1 + arr2_2)
+print(arr2_1 * arr2_2)
+print(arr2_1 / arr2_2)
+print(arr2_1 - arr2_2)
+
+
+--------------------------------------------------
+arithematic functions
+np.min(x)
+np.max(x)
+np.argmin(x)     index of minimum value
+np.argmax(x)
+np.sqrt(x)
+np.cos(x)
+np.sin(x)
+np.cumsum(x)      cummulative summation
+--------------------------------------------------
+
+axis ->0  = whats under first bracket
+axis ->1 = whats under next bracket
+axis ->2 = whats under next to next bracket
+
+for shapping until the total no. of elements are equal to multiplication of row and columns you can make any kind of fucking array
+
+
+arr1 = np.array([15,64,84,35])
+arr2 = np.array([[12,23,34] , [23,34,45]])
+arr3 = np.array([[12,134,143] , [12,32 ,78]])
+print(arr1 , arr2 , arr3 , sep = "\n")
+print(arr1.shape , arr2.shape , arr3.shape ,sep="\n")
+
+arr4 = arr3.reshape(3,2)
+print(arr4)
+
+
+#broadcasting
+
+Rule 1:- the dimension needs to be same
+Rule 2:- if dimension not same then atleast one of the rightmost value of dimensions should be 1 , do the same with
+all values going from right to left
+Rule 3:- the dimension after broadcasting is the maximum element of respective place of dimension
+
+arr2 = np.array([[12,23,34] , [23,34,45]])
+print(arr1.shape , arr2.shape ,sep="\n")
+print(arr1+arr2)
+arr3 = np.array([1,2,3,4,5,6])
+arr = arr3.reshape(3,2,1)
+print(arr)
+arr4 = np.array([1,2,3,4,5,6,7,8,9,10,11,12])
+arr_ = arr4.reshape(3,2,2)
+print(arr_)
+print(arr+arr_)
