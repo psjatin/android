@@ -118,7 +118,7 @@ print(arr4)
 
 Rule 1:- the dimension needs to be same
 Rule 2:- if dimension not same then atleast one of the rightmost value of dimensions should be 1 , do the same with
-all values going from right to left
+all values going from right to leftgit
 Rule 3:- the dimension after broadcasting is the maximum element of respective place of dimension
 
 arr2 = np.array([[12,23,34] , [23,34,45]])
@@ -131,3 +131,78 @@ arr4 = np.array([1,2,3,4,5,6,7,8,9,10,11,12])
 arr_ = arr4.reshape(3,2,2)
 print(arr_)
 print(arr+arr_)
+
+
+
+indexing and slicing is same as lists in array
+
+use of nditer to iterate the elements inside the array
+or else using for loop
+
+#copy vs view
+copy - a copy of the array with different location
+        any chnges made in original will not alter the copy of its
+view - a copy of the array with the same loccation
+        any changes made in original will alter the copy too
+
+        modifying the view array will also affect the original array
+        — because they share the same underlying data memory.
+
+
+
+concatenation -- only use when a new axis is not needed to be added ,
+                    when u have to work on existing axis
+                    like if shape is (2,1) which is usualy [2,]
+                    then only axis 0 could be concatenated
+
+stack -- jab new axis banani ho
+           agar aangi baangi banani hai to use kro bahi ek baar tutorial dekh le revise ke liye
+            baaki easy h
+
+jatin = np.array([[1,2]])
+ria = np.array([[1,2],[2,3]])
+
+# shaurya = np.concatenate((jatin , ria) , axis=0)
+
+# print(shaurya)
+# yrr concatenation ya stack dono use krte hue dimag lagana hai ki konsi
+# dimension use ho skti ha konsi nhi dhyaan se koi hard and fine rule nhi hai
+
+jispa = np.array([1,2,3])
+village = np.array([4,5,6])
+jispa_village = np.concatenate((jispa , village) , axis=0)
+print(jispa_village)
+jipsa_cillage = np.stack((jispa , village) , axis=0)
+print(jipsa_cillage)
+jipsa_cillage1 = np.stack((jispa , village) , axis=1)
+print(jipsa_cillage1)
+
+
+jasmin  = np.array([[["roya mai" , "teri saari" ,"batein cudi"],["mil jaye" , "jo bhi" , "raaj tera"],
+                     ["tu aata" , "sambhal kr" , "rkha wo"]],[["wo phool","mera tu" , "adhuri si"],["ab hisse" , "rhna tha" ,"bnke hm"]
+    ,["pr tu" , "atta nhi " ,"jaata wahin"]]])
+rahul = np.array([[[1,2,3] ,[2,3,4] ,[3,4,5]]
+                     ,[[5,6,7],[6,7,8],[7,8,9]]])
+
+# print(jasmin)
+# print(rahul)
+
+# jasrahul = np.stack((jasmin,rahul) , axis=0)
+# jasrahul1 = np.stack((jasmin,rahul) , axis=1)
+# jasrahul2 = np.stack((jasmin,rahul) , axis=2)
+# print(jasrahul)
+# print(jasrahul1)
+# print(jasrahul2)
+
+j = np.array([[["a","b","c"] ,["a","b","c"],["a","b","c"]]
+                 ,[["a","b","c"],["a","b","c"],["a","b","c"]]])
+k = np.array([[[1,2,3] ,[2,3,4] ,[3,4,5]]
+                     ,[[5,6,7],[6,7,8],[7,8,9]]])
+j1 = np.stack((j ,k) , axis=0)
+j2 = np.stack((j ,k) , axis=1)
+j3 = np.stack((j ,k) , axis=2)
+print(j1)
+print("")
+print(j2)
+print("")
+print(j3)
